@@ -14,7 +14,6 @@ func _physics_process(delta):
 	velocity = Vector3(0, 0, -speed).rotated(Vector3(0, 1, 0), rotation.y)
 	rotation = Vector3(0, rotation.y + rotation_dir * rotation_speed * delta, 0)
 	velocity = move_and_slide(velocity)
-	print(translation)
 
 func get_input():
 	rotation_dir = 0

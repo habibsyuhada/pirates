@@ -12,7 +12,7 @@ var g:float = 0
 var fire_velocity:Vector3 = Vector3()
 var max_height:float = 3.0
 
-export (PackedScene) var WaterFoam
+export (PackedScene) var WaterFoam = preload("res://Objects/WaterFoam.tscn")
 
 
 func _ready():
@@ -27,10 +27,10 @@ func fire(origin:Vector3, nTarget:Vector3):
 func _physics_process(delta):
 	translate(fire_velocity * delta)
 	fire_velocity.y -= g * delta
-	print(translation)
 	if translation.y < vector_target.y:
 		var asd = WaterFoam.instance()
-		owner.add_child(asd)
+		get_tree().get_root().add_child(asd)
+		print(get_tree().get_root().name)
 		asd.translation = translation
 		queue_free()
 
