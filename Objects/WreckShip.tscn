@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/Models/OBJ format/ship_wreck.obj" type="ArrayMesh" id=1]
+
+[sub_resource type="CapsuleShape" id=1]
+height = 8.54244
+
+[node name="StaticBody" type="StaticBody"]
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 0.075, 0, 0, 0, 0.075, 0, 0, 0, 0.075, 0, 0, 0 )
+mesh = ExtResource( 1 )
+material/0 = null
+material/1 = null
+material/2 = null
+material/3 = null
+material/4 = null
+material/5 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1.05374, 0, 0, 0, 0.927768, 0, 0, 0, 0.420315, 0, 0.835727, -0.114573 )
+shape = SubResource( 1 )

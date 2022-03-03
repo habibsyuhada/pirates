@@ -1,0 +1,8 @@
+{
+	"contains_albedo": true,
+	"resolution": 512,
+	"src": {
+		"a": "res://Assets/Textures/Sand_004_4K/Sand_004_Height.png",
+		"rgb": "res://Assets/Textures/Sand_004_4K/Sand_004_COLOR.png"
+	}
+}

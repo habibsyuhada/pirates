@@ -1,0 +1,71 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Assets/Models/OBJ format/ship_light.obj" type="ArrayMesh" id=1]
+[ext_resource path="res://Objects/Ship.gd" type="Script" id=2]
+
+[sub_resource type="CapsuleShape" id=1]
+height = 8.54244
+
+[sub_resource type="BoxShape" id=2]
+
+[node name="Ship" type="KinematicBody"]
+script = ExtResource( 2 )
+
+[node name="NavigationMeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 0.075, 0, 0, 0, 0.075, 0, 0, 0, 0.075, 0, 0, 0 )
+mesh = ExtResource( 1 )
+material/0 = null
+material/1 = null
+material/2 = null
+material/3 = null
+material/4 = null
+material/5 = null
+material/6 = null
+material/7 = null
+material/8 = null
+material/9 = null
+material/10 = null
+material/11 = null
+material/12 = null
+material/13 = null
+material/14 = null
+material/15 = null
+material/16 = null
+material/17 = null
+material/18 = null
+material/19 = null
+material/20 = null
+material/21 = null
+material/22 = null
+material/23 = null
+material/24 = null
+material/25 = null
+material/26 = null
+material/27 = null
+material/28 = null
+material/29 = null
+material/30 = null
+material/31 = null
+material/32 = null
+material/33 = null
+material/34 = null
+material/35 = null
+material/36 = null
+material/37 = null
+material/38 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1.05374, 0, 0, 0, 0.927768, 0, 0, 0, 0.420315, 0, 0.835727, -0.114573 )
+shape = SubResource( 1 )
+
+[node name="Muzzle" type="Position3D" parent="."]
+transform = Transform( -4.37114e-08, -0.0871557, -0.996195, 0, 0.996195, -0.0871557, 1, -3.8097e-09, -4.35451e-08, 0.8, 0.8, 0 )
+
+[node name="Area" type="Area" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="Area"]
+transform = Transform( 10, 0, 0, 0, 0.537, 0, 0, 0, 1.546, 10, 0.547, 0 )
+shape = SubResource( 2 )
+
+[connection signal="body_entered" from="Area" to="." method="_on_Area_body_entered"]
+[connection signal="body_exited" from="Area" to="." method="_on_Area_body_exited"]
