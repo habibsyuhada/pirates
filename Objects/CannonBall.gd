@@ -31,7 +31,8 @@ func _physics_process(delta):
 		var asd = WaterFoam.instance()
 		get_tree().get_root().add_child(asd)
 		print(get_tree().get_root().name)
-		asd.translation = translation
+		asd.global_transform.origin = global_transform.origin
+		asd.emitting = true
 		queue_free()
 
 func calc_g_and_velocity(proj_pos:Vector3, target_pos:Vector3):
