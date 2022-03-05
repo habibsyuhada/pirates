@@ -1,0 +1,42 @@
+[gd_scene load_steps=9 format=2]
+
+[sub_resource type="Gradient" id=1]
+colors = PoolColorArray( 0, 1, 0.0784314, 1, 0, 1, 0.0784314, 0 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+
+[sub_resource type="Curve" id=3]
+_data = [ Vector2( 0, 0 ), 0.0, 1.01606, 0, 1, Vector2( 0.98419, 1 ), 1.01606, 0.0, 1, 0 ]
+
+[sub_resource type="CurveTexture" id=4]
+curve = SubResource( 3 )
+
+[sub_resource type="ParticlesMaterial" id=5]
+gravity = Vector3( 0, 0, 0 )
+scale_curve = SubResource( 4 )
+color_ramp = SubResource( 2 )
+
+[sub_resource type="SpatialMaterial" id=6]
+flags_transparent = true
+flags_unshaded = true
+vertex_color_use_as_albedo = true
+
+[sub_resource type="SphereMesh" id=7]
+material = SubResource( 6 )
+radius = 10.0
+height = 0.001
+
+[sub_resource type="SphereShape" id=8]
+radius = 5.0
+
+[node name="CityGateIn" type="Area"]
+
+[node name="Particles" type="Particles" parent="."]
+amount = 2
+lifetime = 3.0
+process_material = SubResource( 5 )
+draw_pass_1 = SubResource( 7 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+shape = SubResource( 8 )

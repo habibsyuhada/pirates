@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Dock.obj-60591f9c3a5389ee681f57b9f2e221dd.mesh"
+
+[deps]
+
+files=[ "res://.import/Dock.obj-60591f9c3a5389ee681f57b9f2e221dd.mesh" ]
+
+source_file="res://Assets/Models/User/Dock.obj"
+dest_files=[ "res://.import/Dock.obj-60591f9c3a5389ee681f57b9f2e221dd.mesh", "res://.import/Dock.obj-60591f9c3a5389ee681f57b9f2e221dd.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

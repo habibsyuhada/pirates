@@ -30,6 +30,10 @@ config/name="Pirates"
 run/main_scene="res://Screens/ShipControl.tscn"
 config/icon="res://icon.png"
 
+[debug]
+
+shapes/collision/shape_color=Color( 0.701961, 0, 0, 0.419608 )
+
 [display]
 
 window/size/width=1280

@@ -1,0 +1,8 @@
+{
+	"contains_albedo": true,
+	"resolution": 512,
+	"src": {
+		"a": "res://Assets/Textures/Grass_001/Stylized_Grass_003_height.png",
+		"rgb": "res://Assets/Textures/Grass_001/Stylized_Grass_003_basecolor.jpg"
+	}
+}
