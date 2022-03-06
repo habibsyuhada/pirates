@@ -17,6 +17,12 @@ func _physics_process(delta):
 	rotation = Vector3(0, rotation.y + rotation_dir * rotation_speed * delta, 0)
 	velocity = move_and_slide(velocity)
 	global_transform.origin.y = 0
+	$Particles.emitting = false
+	$Particles.process_material.set("initial_velocity", speed/accel_max_speed)
+	$Particles.process_material.set("linear_accel", -speed/accel_max_speed/2)
+	$Particles.process_material.get("initial_velocity")
+	if(abs(speed) > 1):
+		$Particles.emitting = true
 
 func get_input():
 	rotation_dir = 0

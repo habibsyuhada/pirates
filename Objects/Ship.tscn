@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Assets/Models/OBJ format/ship_light.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://Objects/Ship.gd" type="Script" id=2]
@@ -8,6 +8,56 @@
 height = 8.54244
 
 [sub_resource type="BoxShape" id=2]
+
+[sub_resource type="Gradient" id=5]
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=6]
+gradient = SubResource( 5 )
+
+[sub_resource type="Curve" id=8]
+_data = [ Vector2( 0, 1 ), 0.0, -1.012, 0, 1, Vector2( 0.988142, 0 ), -1.012, 0.0, 1, 0 ]
+
+[sub_resource type="CurveTexture" id=9]
+curve = SubResource( 8 )
+
+[sub_resource type="ParticlesMaterial" id=7]
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 1.0
+initial_velocity_random = 1.0
+linear_accel = -1.0
+scale_curve = SubResource( 9 )
+color_ramp = SubResource( 6 )
+
+[sub_resource type="SpatialMaterial" id=3]
+flags_transparent = true
+flags_unshaded = true
+vertex_color_use_as_albedo = true
+params_billboard_mode = 1
+uv2_scale = Vector3( 0.1, 0.1, 0.1 )
+
+[sub_resource type="QuadMesh" id=4]
+material = SubResource( 3 )
+size = Vector2( 0.5, 0.5 )
+
+[sub_resource type="SpatialMaterial" id=12]
+render_priority = -1
+flags_transparent = true
+flags_unshaded = true
+albedo_color = Color( 0, 0.0235294, 1, 0.658824 )
+
+[sub_resource type="SpatialMaterial" id=10]
+flags_transparent = true
+flags_unshaded = true
+vertex_color_use_as_albedo = true
+albedo_color = Color( 0.0313726, 0, 1, 0.843137 )
+
+[sub_resource type="PlaneMesh" id=11]
+material = SubResource( 10 )
+size = Vector2( 150, 150 )
+subdivide_width = 30
+subdivide_depth = 30
 
 [node name="Ship" type="KinematicBody"]
 script = ExtResource( 2 )
@@ -68,7 +118,21 @@ transform = Transform( -4.37114e-08, -0.0871557, -0.996195, 0, 0.996195, -0.0871
 [node name="CollisionShape" type="CollisionShape" parent="Area"]
 transform = Transform( 10, 0, 0, 0, 0.537, 0, 0, 0, 1.546, 10, 0.547, 0 )
 shape = SubResource( 2 )
-disabled = true
+
+[node name="Particles" type="Particles" parent="."]
+transform = Transform( 0.999976, 0, 0.00698126, 0, 1, 0, -0.00698126, 0, 0.999976, 0, 0, 0 )
+amount = 50
+lifetime = 3.0
+visibility_aabb = AABB( -4, -3.48877, -4, 8, 8, 8 )
+local_coords = false
+process_material = SubResource( 7 )
+draw_pass_1 = SubResource( 4 )
+
+[node name="Water" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.012, 0.4, -0.032 )
+material_override = SubResource( 12 )
+mesh = SubResource( 11 )
+material/0 = null
 
 [connection signal="body_entered" from="Area" to="." method="_on_Area_body_entered"]
 [connection signal="body_exited" from="Area" to="." method="_on_Area_body_exited"]

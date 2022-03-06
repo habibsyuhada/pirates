@@ -3,7 +3,7 @@
 [ext_resource path="res://Objects/WaterFoam.gd" type="Script" id=1]
 
 [sub_resource type="Gradient" id=3]
-offsets = PoolRealArray( 0, 0.5 )
+offsets = PoolRealArray( 0, 0.75 )
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
 
 [sub_resource type="GradientTexture" id=4]
@@ -18,6 +18,8 @@ initial_velocity_random = 0.19
 color_ramp = SubResource( 4 )
 
 [sub_resource type="SpatialMaterial" id=5]
+flags_transparent = true
+flags_unshaded = true
 vertex_color_use_as_albedo = true
 
 [sub_resource type="CubeMesh" id=2]
@@ -27,7 +29,7 @@ material = SubResource( 5 )
 transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0 )
 emitting = false
 amount = 25
-lifetime = 3.0
+lifetime = 2.0
 one_shot = true
 explosiveness = 0.75
 process_material = SubResource( 1 )
