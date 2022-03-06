@@ -11,10 +11,16 @@ var rotation_dir = 0
 var velocity = Vector3()
 var speed = 0
 
+func _ready():
+	get_node("/root/Game/HUD").connect("max_speed_slider_updated", self, "_on_max_speed_slider_updated")
+	get_node("/root/Game/HUD").connect("update_rotaion_by_analog", self, "_on_update_rotaion_by_analog")
+
 func _physics_process(delta):
 	get_input()
 	velocity = Vector3(0, 0, -speed).rotated(Vector3(0, 1, 0), rotation.y)
 	rotation = Vector3(0, rotation.y + rotation_dir * rotation_speed * delta, 0)
+	if rotation_dir != 0 :
+		rotation_dir = 0
 	velocity = move_and_slide(velocity)
 	global_transform.origin.y = 0
 	$Particles.emitting = false
@@ -24,8 +30,17 @@ func _physics_process(delta):
 	if(abs(speed) > 1):
 		$Particles.emitting = true
 
+func _on_max_speed_slider_updated(slider_value):
+	current_max_speed = slider_value / 100 * max_speed
+	if current_max_speed > max_speed:
+		current_max_speed = max_speed
+
+func _on_update_rotaion_by_analog(force, pos):
+	var direction_analog = pos.angle()
+	if rotation.y < direction_analog : rotation_dir += 1
+	if rotation.y > direction_analog : rotation_dir -= 1
+
 func get_input():
-	rotation_dir = 0
 	velocity = Vector3()
 	if Input.is_action_pressed("ui_right"):
 		rotation_dir -= 1
