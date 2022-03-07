@@ -47,15 +47,11 @@ func _on_max_speed_slider_updated(slider_value):
 
 func _on_update_rotaion_by_analog(force, pos):
 	var direction_analog = Vector2(pos.x, -pos.y).angle()
-	#target_dir_analog = direction_analog
-	
+
 	var max_angle = PI * 2
 	var difference = fmod(direction_analog - rotation.y, max_angle)
 	difference = fmod(2 * difference, max_angle) - difference
 	target_dir_analog = rotation.y + difference
-	
-	print(PI)
-	print(target_dir_analog)
 	
 func _on_change_status_analog(status):
 	analog_steer = status

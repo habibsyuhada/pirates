@@ -94,6 +94,9 @@ func get_force():
 	return currentForce
 	
 func _input(event):
+	input_manual_process(event)
+
+func input_manual_process(event):
 	if local_paused:return
 	
 	var incomingPointer = extractPointerIdx(event)
@@ -121,6 +124,11 @@ func need2ChangeActivePointer(event):
 		if mouseButton or touch:
 			isDragging = true
 			if isDynamicallyShowing:
+				if(!is_instance_valid(get_parent().get_node(str("Area_", name, "/Area_Shape_", name)))) : return false 
+				var area_analog = get_parent().get_node(str("Area_", name, "/Area_Shape_", name))
+				area_analog.get_global_transform_with_canvas().origin
+				if event.position.distance_to(area_analog.get_global_transform_with_canvas().origin) >= area_analog.shape.radius:
+					return false
 				return mouse_event_pos
 			else:
 				var lenght = (get_global_position() - Vector2(mouse_event_pos.x, mouse_event_pos.y)).length_squared();

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Assets/UI/Slider_Background.png" type="Texture" id=1]
 [ext_resource path="res://Objects/UI/StyleBoxFlat_Slider.tres" type="StyleBox" id=2]
@@ -11,6 +11,9 @@
 [sub_resource type="StyleBoxTexture" id=1]
 texture = ExtResource( 1 )
 region_rect = Rect2( 0, 0, 84, 602 )
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 30.0
 
 [node name="HUD" type="Control"]
 anchor_left = 0.5
@@ -51,6 +54,31 @@ typeAnalogic = 4
 scaleBall = Vector2( 0.5, 0.5 )
 bigBallTexture = ExtResource( 7 )
 smallBallTexture = ExtResource( 6 )
+
+[node name="Shoot_Analog" type="Node2D" parent="."]
+position = Vector2( 994, 614 )
+script = ExtResource( 5 )
+isDynamicallyShowing = true
+typeAnalogic = 4
+scaleBall = Vector2( 0.25, 0.25 )
+bigBallTexture = ExtResource( 7 )
+smallBallTexture = ExtResource( 6 )
+directionsResult = {
+"down": "down",
+"down_left": "down_left",
+"down_right": "down_right",
+"left": "left",
+"right": "right",
+"up": "up",
+"up_left": "up_left",
+"up_right": "up_right"
+}
+
+[node name="Area_Shoot_Analog" type="Area2D" parent="."]
+position = Vector2( 972, 644 )
+
+[node name="Area_Shape_Shoot_Analog" type="CollisionShape2D" parent="Area_Shoot_Analog"]
+shape = SubResource( 2 )
 
 [connection signal="value_changed" from="VSlider" to="." method="_on_VSlider_value_changed"]
 [connection signal="analogChange" from="CanvasLayer/AnalogController" to="." method="_on_AnalogController_analogChange"]
