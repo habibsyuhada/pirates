@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Slider_Grabber_Area.png-1a260909e699b2105cf4982b4e43821c.stex"
+path="res://.import/Button_Blank.png-b68c1974311d70bf385b40018fa18245.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/UI/Slider_Grabber_Area.png"
-dest_files=[ "res://.import/Slider_Grabber_Area.png-1a260909e699b2105cf4982b4e43821c.stex" ]
+source_file="res://Assets/UI/Button_Blank.png"
+dest_files=[ "res://.import/Button_Blank.png-b68c1974311d70bf385b40018fa18245.stex" ]
 
 [params]
 

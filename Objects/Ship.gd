@@ -38,6 +38,7 @@ func _physics_process(delta):
 	$Particles.process_material.set("linear_accel", -speed/accel_max_speed/2)
 	$Particles.process_material.get("initial_velocity")
 	if(abs(speed) > 1):
+		print(velocity)
 		$Particles.emitting = true
 
 func _on_max_speed_slider_updated(slider_value):

@@ -47,8 +47,10 @@ signal analogChange(force, pos)
 signal analogPressed
 signal analogRelease
 
+export(bool) var isHideDinamic = true
+
 func _ready() -> void:
-	initial_position = global_position
+	initial_position = position
 	_configAnalog()
 	initialized = true
 	scale = Vector2(1,1)
@@ -73,7 +75,8 @@ func _configAnalog():
 	squaredHalfSizeLenght = halfSize.x*halfSize.y;
 
 	if isDynamicallyShowing:
-		modulate.a = 0
+		if isHideDinamic :
+			modulate.a = 0
 	else:
 		yield(get_tree().create_timer(.2), "timeout")
 		position = initial_position
@@ -107,7 +110,7 @@ func input_manual_process(event):
 		if !isDragging: return
 		if (currentPointerIDX != incomingPointer) and event.is_pressed():
 			currentPointerIDX = incomingPointer;
-			if event is InputEventMouseMotion or event is InputEventMouseButton:
+			if event is InputEventMouseMotion or event is InputEventMouseButton or event is InputEventScreenTouch or event is InputEventScreenDrag:
 				showAtPos(event.position)
 
 	var theSamePointer = currentPointerIDX == incomingPointer
@@ -119,7 +122,7 @@ func need2ChangeActivePointer(event):
 	var mouseButton = event is InputEventMouseButton
 	var touch = event is InputEventScreenTouch
 	
-	if event is InputEventMouseMotion or event is InputEventMouseButton:
+	if event is InputEventMouseMotion or event is InputEventMouseButton or event is InputEventScreenTouch or event is InputEventScreenDrag:
 		var mouse_event_pos = event.position
 		if mouseButton or touch:
 			isDragging = true
@@ -127,7 +130,15 @@ func need2ChangeActivePointer(event):
 				if(!is_instance_valid(get_parent().get_node(str("Area_", name, "/Area_Shape_", name)))) : return false 
 				var area_analog = get_parent().get_node(str("Area_", name, "/Area_Shape_", name))
 				area_analog.get_global_transform_with_canvas().origin
-				if event.position.distance_to(area_analog.get_global_transform_with_canvas().origin) >= area_analog.shape.radius:
+				if area_analog.shape.get("radius") != null :
+					if event.position.distance_to(area_analog.get_global_transform_with_canvas().origin) >= area_analog.shape.radius:
+						return false
+				elif area_analog.shape.get("extents") != null :
+					if abs(event.position.x - area_analog.get_global_transform_with_canvas().origin.x) >= area_analog.shape.extents.x:
+						return false
+					elif abs(event.position.y - area_analog.get_global_transform_with_canvas().origin.y) >= area_analog.shape.extents.y:
+						return false
+				else: 
 					return false
 				return mouse_event_pos
 			else:
@@ -160,8 +171,10 @@ func process_input(event):
 	if local_paused:return
 	var mouseButton = event is InputEventMouseButton
 	var mouseMove = event is InputEventMouseMotion
+	var touchButton = event is InputEventScreenTouch
+	var touchMove = event is InputEventScreenDrag
 	
-	if mouseMove or mouseButton:
+	if mouseMove or mouseButton or touchButton or touchMove:
 		calculateForce(event.position.x - self.get_global_position().x, event.position.y - self.get_global_position().y)
 	updateBallPos()
 	
@@ -261,7 +274,11 @@ func reset() -> void:
 	calculateForce(0, 0)
 
 	if isDynamicallyShowing:
-		hide()
+		if isHideDinamic :
+			hide()
+		else :
+			position = initial_position
+			updateBallPos()
 	else:
 		updateBallPos()
 
@@ -275,7 +292,8 @@ func showAtPos(pos) -> void:
 		self.modulate.a += .1
 	
 	if !isActive():
-		self.modulate.a = 0
+		if isHideDinamic :
+			self.modulate.a = 0
 			
 func hide() -> void:
 	while self.modulate.a > 0.0 and !isActive():
@@ -324,7 +342,7 @@ func isPressed(event):
 func isReleased(event):
 	if event is InputEventScreenTouch:
 		return !event.pressed
-	elif event is InputEventMouseButton:
+	elif event is InputEventMouseButton or event is InputEventScreenTouch:
 		return !event.pressed
 
 func pause() -> void:
