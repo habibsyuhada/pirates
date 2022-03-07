@@ -54,3 +54,5 @@ smallBallTexture = ExtResource( 6 )
 
 [connection signal="value_changed" from="VSlider" to="." method="_on_VSlider_value_changed"]
 [connection signal="analogChange" from="CanvasLayer/AnalogController" to="." method="_on_AnalogController_analogChange"]
+[connection signal="analogPressed" from="CanvasLayer/AnalogController" to="." method="_on_AnalogController_analogPressed"]
+[connection signal="analogRelease" from="CanvasLayer/AnalogController" to="." method="_on_AnalogController_analogRelease"]
