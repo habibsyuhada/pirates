@@ -1,5 +1,7 @@
 extends Control
 
+#00cfff world sky color
+
 signal max_speed_slider_updated(slider_value)
 signal update_rotaion_by_analog(force, pos)
 signal change_status_analog(status)
