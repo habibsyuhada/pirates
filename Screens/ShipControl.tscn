@@ -109,7 +109,4 @@ material/1 = null
 [node name="CollisionShape" type="CollisionShape" parent="World/Kota/Kota1/Island/StaticBody"]
 shape = SubResource( 3 )
 
-[node name="DirectionalLight" type="DirectionalLight" parent="World"]
-transform = Transform( 1, 0, 0, 0, 0.758305, 0.6519, 0, -0.6519, 0.758305, 0, 86.0273, 0 )
-
 [node name="HUD" parent="." instance=ExtResource( 5 )]

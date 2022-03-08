@@ -94,6 +94,9 @@ position = Vector2( 0, 100 )
 scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 3 )
 
+[connection signal="analogChange" from="Shoot_Analog" to="." method="_on_Shoot_Analog_analogChange"]
+[connection signal="analogPressed" from="Shoot_Analog" to="." method="_on_Shoot_Analog_analogPressed"]
+[connection signal="analogRelease" from="Shoot_Analog" to="." method="_on_Shoot_Analog_analogRelease"]
 [connection signal="analogChange" from="Move_Analog" to="." method="_on_Move_Analog_analogChange"]
 [connection signal="analogPressed" from="Move_Analog" to="." method="_on_Move_Analog_analogPressed"]
 [connection signal="analogRelease" from="Move_Analog" to="." method="_on_Move_Analog_analogRelease"]

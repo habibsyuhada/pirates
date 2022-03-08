@@ -6,6 +6,7 @@ export (int) var current_max_speed = 0
 export (int) var max_speed = 10
 export (float) var rotation_speed = 0.75
 export (PackedScene) var Bullet
+export (float) var range_shoot = 10
 
 var rotation_dir = 0
 var velocity = Vector3()
@@ -17,6 +18,8 @@ func _ready():
 	get_node("/root/Game/HUD").connect("max_speed_slider_updated", self, "_on_max_speed_slider_updated")
 	get_node("/root/Game/HUD").connect("update_rotaion_by_analog", self, "_on_update_rotaion_by_analog")
 	get_node("/root/Game/HUD").connect("change_status_analog", self, "_on_change_status_analog")
+	get_node("/root/Game/HUD").connect("status_shoot_analog", self, "_on_status_shoot_analog")
+	get_node("/root/Game/HUD").connect("value_shoot_analog", self, "_on_value_shoot_analog")
 
 func _physics_process(delta):
 	get_input()
@@ -87,9 +90,12 @@ func get_input():
 				b.fire(global_transform.origin, body.translation)
 
 
-func _on_Area_body_entered(body):
+func _on_status_shoot_analog(status):
 	pass # Replace with function body.
 
 
-func _on_Area_body_exited(body):
-	pass # Replace with function body.
+func _on_value_shoot_analog(force, pos):
+	$Aimer.global_transform.origin.x = global_transform.origin.x + pos.x * range_shoot
+	$Aimer.global_transform.origin.z = global_transform.origin.z + pos.y * range_shoot
+	
+	
