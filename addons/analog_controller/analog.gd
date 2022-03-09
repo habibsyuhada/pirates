@@ -48,6 +48,7 @@ signal analogPressed
 signal analogRelease
 
 export(bool) var isHideDinamic = true
+var initial_position_dinamyc = Vector2.ZERO
 
 func _ready() -> void:
 	initial_position = position
@@ -97,9 +98,6 @@ func get_force():
 	return currentForce
 	
 func _input(event):
-	input_manual_process(event)
-
-func input_manual_process(event):
 	if local_paused:return
 	
 	var incomingPointer = extractPointerIdx(event)
@@ -110,6 +108,7 @@ func input_manual_process(event):
 		if !isDragging: return
 		if (currentPointerIDX != incomingPointer) and event.is_pressed():
 			currentPointerIDX = incomingPointer;
+			initial_position_dinamyc = event.position
 			if event is InputEventMouseMotion or event is InputEventMouseButton or event is InputEventScreenTouch or event is InputEventScreenDrag:
 				showAtPos(event.position)
 
@@ -188,8 +187,8 @@ func process_input(event):
 		var _pos = Vector2.ZERO
 		if typeAnalogic == typesAnalog.DIRECTION_360:
 			_force = currentForce2
-			_pos = currentForce.normalized() * Vector2(1, -1)
-			
+			#_pos = currentForce.normalized() * Vector2(1, -1)
+			_pos = ball.position / scaleBall / 200
 			emit_signal("analogChange", _force, _pos)
 			return
 			

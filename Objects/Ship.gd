@@ -6,7 +6,7 @@ export (int) var current_max_speed = 0
 export (int) var max_speed = 10
 export (float) var rotation_speed = 0.75
 export (PackedScene) var Bullet
-export (float) var range_shoot = 10
+export (float) var range_shoot = 15
 
 var rotation_dir = 0
 var velocity = Vector3()
@@ -95,7 +95,7 @@ func _on_status_shoot_analog(status):
 
 
 func _on_value_shoot_analog(force, pos):
+	print(pos)
 	$Aimer.global_transform.origin.x = global_transform.origin.x + pos.x * range_shoot
 	$Aimer.global_transform.origin.z = global_transform.origin.z + pos.y * range_shoot
-	
 	

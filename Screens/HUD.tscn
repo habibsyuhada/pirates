@@ -33,7 +33,7 @@ __meta__ = {
 }
 
 [node name="Shoot_Analog" type="Node2D" parent="."]
-position = Vector2( 994, 614 )
+position = Vector2( 972, 644 )
 script = ExtResource( 5 )
 isDynamicallyShowing = true
 typeAnalogic = 4
