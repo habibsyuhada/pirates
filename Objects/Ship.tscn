@@ -1,9 +1,8 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Assets/Models/OBJ format/ship_light.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://Objects/Ship.gd" type="Script" id=2]
 [ext_resource path="res://Objects/CannonBall.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Assets/UI/Button_Blank.png" type="Texture" id=4]
 
 [sub_resource type="CapsuleShape" id=1]
 height = 8.54244
@@ -62,10 +61,6 @@ material = SubResource( 10 )
 size = Vector2( 150, 150 )
 subdivide_width = 30
 subdivide_depth = 30
-
-[sub_resource type="CylinderShape" id=13]
-radius = 2.0
-height = 0.1
 
 [node name="Ship" type="KinematicBody"]
 script = ExtResource( 2 )
@@ -142,15 +137,3 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.012, 0.4, -0.032 )
 material_override = SubResource( 12 )
 mesh = SubResource( 11 )
 material/0 = null
-
-[node name="Aimer" type="Area" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
-gravity = 9.663
-
-[node name="CollisionShape" type="CollisionShape" parent="Aimer"]
-shape = SubResource( 13 )
-
-[node name="Sprite3D" type="Sprite3D" parent="Aimer"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
-pixel_size = 0.02
-texture = ExtResource( 4 )

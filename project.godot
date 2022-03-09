@@ -27,7 +27,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Pirates"
-run/main_scene="res://Screens/ShipControl.tscn"
+run/main_scene="res://Screens/World.tscn"
 config/icon="res://icon.png"
 
 [debug]

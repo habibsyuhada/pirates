@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Objects/Ship.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Screens/ShipControl.gd" type="Script" id=2]
+[ext_resource path="res://Screens/World.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Models/User/Island01.obj" type="ArrayMesh" id=3]
 [ext_resource path="res://Objects/WreckShip.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Screens/HUD.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Objects/Aimer.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Assets/Models/User/Dock.obj" type="ArrayMesh" id=12]
 [ext_resource path="res://Assets/Models/User/House.obj" type="ArrayMesh" id=13]
 [ext_resource path="res://Objects/ActionableMark.tscn" type="PackedScene" id=14]
@@ -17,12 +18,14 @@ data = PoolVector3Array( -40.2521, 5.7377, 4.939, -45.3042, 2.7855, 7.0401, -41.
 
 [node name="Game" type="Node"]
 
+[node name="HUD" parent="." instance=ExtResource( 5 )]
+
 [node name="World" type="Spatial" parent="."]
 script = ExtResource( 2 )
 camera_distance = 15
 
 [node name="Camera" type="Camera" parent="World"]
-transform = Transform( -4.37114e-08, -0.923879, 0.382684, 0, 0.382684, 0.923879, -1, 4.03841e-08, -1.67276e-08, 15, 30, 0 )
+transform = Transform( -4.37114e-08, -0.923879, 0.382684, 0, 0.382684, 0.923879, -1, 4.0384e-08, -1.67277e-08, 15, 30, 0 )
 current = true
 
 [node name="Ship" parent="World" instance=ExtResource( 1 )]
@@ -109,4 +112,4 @@ material/1 = null
 [node name="CollisionShape" type="CollisionShape" parent="World/Kota/Kota1/Island/StaticBody"]
 shape = SubResource( 3 )
 
-[node name="HUD" parent="." instance=ExtResource( 5 )]
+[node name="Aimer" parent="World" instance=ExtResource( 6 )]

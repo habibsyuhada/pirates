@@ -30,7 +30,8 @@ func _on_Shoot_Analog_analogPressed():
 
 
 func _on_Shoot_Analog_analogChange(force, pos):
-	emit_signal("value_shoot_analog", force, pos)
+	var range_shoot = 15
+	emit_signal("value_shoot_analog", force, pos * range_shoot)
 
 
 func _on_Shoot_Analog_analogRelease():

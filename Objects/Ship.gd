@@ -18,8 +18,6 @@ func _ready():
 	get_node("/root/Game/HUD").connect("max_speed_slider_updated", self, "_on_max_speed_slider_updated")
 	get_node("/root/Game/HUD").connect("update_rotaion_by_analog", self, "_on_update_rotaion_by_analog")
 	get_node("/root/Game/HUD").connect("change_status_analog", self, "_on_change_status_analog")
-	get_node("/root/Game/HUD").connect("status_shoot_analog", self, "_on_status_shoot_analog")
-	get_node("/root/Game/HUD").connect("value_shoot_analog", self, "_on_value_shoot_analog")
 
 func _physics_process(delta):
 	get_input()
@@ -88,14 +86,10 @@ func get_input():
 				var b = Bullet.instance()
 				owner.add_child(b)
 				b.fire(global_transform.origin, body.translation)
+				print(body.translation)
 
-
-func _on_status_shoot_analog(status):
-	pass # Replace with function body.
-
-
-func _on_value_shoot_analog(force, pos):
-	print(pos)
-	$Aimer.global_transform.origin.x = global_transform.origin.x + pos.x * range_shoot
-	$Aimer.global_transform.origin.z = global_transform.origin.z + pos.y * range_shoot
-	
+func shoot_cannon(target_position):
+	print(target_position)
+	var b = Bullet.instance()
+	owner.add_child(b)
+	b.fire(global_transform.origin, target_position)
