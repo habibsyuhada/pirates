@@ -24,6 +24,7 @@ var halfSize = Vector2()
 var ballPos = Vector2()
 var squaredHalfSizeLenght = 0
 var currentPointerIDX = INACTIVE
+var disable = false
 
 export(bool) var isDynamicallyShowing = false
 export(typesAnalog) var typeAnalogic = typesAnalog.DIRECTION_8
@@ -99,6 +100,7 @@ func get_force():
 	
 func _input(event):
 	if local_paused:return
+	if disable:return
 	
 	var incomingPointer = extractPointerIdx(event)
 	if incomingPointer == INACTIVE:

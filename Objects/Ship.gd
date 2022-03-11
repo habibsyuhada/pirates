@@ -89,7 +89,7 @@ func get_input():
 				print(body.translation)
 
 func shoot_cannon(target_position):
-	print(target_position)
-	var b = Bullet.instance()
-	owner.add_child(b)
-	b.fire(global_transform.origin, target_position)
+	for i in 8:
+		var b = Bullet.instance()
+		owner.add_child(b)
+		b.fire(global_transform.origin, target_position)

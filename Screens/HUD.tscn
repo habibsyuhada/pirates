@@ -61,6 +61,10 @@ shape = SubResource( 2 )
 scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 8 )
 
+[node name="CoolDown_Shoot_Analog" type="Timer" parent="Area_Shoot_Analog"]
+wait_time = 3.0
+one_shot = true
+
 [node name="Move_Analog" type="Node2D" parent="."]
 position = Vector2( 139, 583 )
 script = ExtResource( 5 )
@@ -97,6 +101,7 @@ texture = ExtResource( 3 )
 [connection signal="analogChange" from="Shoot_Analog" to="." method="_on_Shoot_Analog_analogChange"]
 [connection signal="analogPressed" from="Shoot_Analog" to="." method="_on_Shoot_Analog_analogPressed"]
 [connection signal="analogRelease" from="Shoot_Analog" to="." method="_on_Shoot_Analog_analogRelease"]
+[connection signal="timeout" from="Area_Shoot_Analog/CoolDown_Shoot_Analog" to="." method="_on_CoolDown_Shoot_Analog_timeout"]
 [connection signal="analogChange" from="Move_Analog" to="." method="_on_Move_Analog_analogChange"]
 [connection signal="analogPressed" from="Move_Analog" to="." method="_on_Move_Analog_analogPressed"]
 [connection signal="analogRelease" from="Move_Analog" to="." method="_on_Move_Analog_analogRelease"]
