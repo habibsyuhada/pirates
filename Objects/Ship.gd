@@ -23,8 +23,12 @@ func _physics_process(delta):
 	get_input()
 	
 	if analog_steer :
-		if rotation.y < target_dir_analog : rotation_dir += 1
-		if rotation.y > target_dir_analog : rotation_dir -= 1
+		if abs(rotation.y - target_dir_analog) >= 1 :
+			if rotation.y < target_dir_analog : rotation_dir += 1
+			if rotation.y > target_dir_analog : rotation_dir -= 1
+		else :
+			if rotation.y < target_dir_analog : rotation_dir += abs(rotation.y - target_dir_analog)
+			if rotation.y > target_dir_analog : rotation_dir -= abs(rotation.y - target_dir_analog)
 		
 	velocity = Vector3(0, 0, -speed).rotated(Vector3(0, 1, 0), rotation.y)
 	rotation = Vector3(0, rotation.y + rotation_dir * rotation_speed * delta, 0)
@@ -39,7 +43,6 @@ func _physics_process(delta):
 	$Particles.process_material.set("linear_accel", -speed/accel_max_speed/2)
 	$Particles.process_material.get("initial_velocity")
 	if(abs(speed) > 1):
-		print(velocity)
 		$Particles.emitting = true
 
 func _on_max_speed_slider_updated(slider_value):
@@ -54,6 +57,7 @@ func _on_update_rotaion_by_analog(force, pos):
 	var difference = fmod(direction_analog - rotation.y, max_angle)
 	difference = fmod(2 * difference, max_angle) - difference
 	target_dir_analog = rotation.y + difference
+	print(rad2deg(target_dir_analog))
 	
 func _on_change_status_analog(status):
 	analog_steer = status
@@ -86,7 +90,6 @@ func get_input():
 				var b = Bullet.instance()
 				owner.add_child(b)
 				b.fire(global_transform.origin, body.translation)
-				print(body.translation)
 
 func shoot_cannon(target_position):
 	for i in 8:
