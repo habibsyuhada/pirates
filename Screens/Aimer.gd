@@ -12,6 +12,7 @@ func _ready():
 func _process(delta):
 	global_transform.origin.x = ship.global_transform.origin.x + target.y
 	global_transform.origin.z = ship.global_transform.origin.z + -target.x
+	#$Sprite.modulate = Color(1, 0, 0)
 	
 func _on_status_shoot_analog(status):
 	visible = status

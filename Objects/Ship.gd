@@ -25,8 +25,12 @@ func _physics_process(delta):
 	get_input()
 	
 	if analog_steer :
-		if rotation.y < target_dir_analog : rotation_dir += 1
-		if rotation.y > target_dir_analog : rotation_dir -= 1
+		if abs(rotation.y - target_dir_analog) >= 1 :
+			if rotation.y < target_dir_analog : rotation_dir += 1
+			if rotation.y > target_dir_analog : rotation_dir -= 1
+		else :
+			if rotation.y < target_dir_analog : rotation_dir += abs(rotation.y - target_dir_analog)
+			if rotation.y > target_dir_analog : rotation_dir -= abs(rotation.y - target_dir_analog)
 		
 	velocity = Vector3(0, 0, -speed).rotated(Vector3(0, 1, 0), rotation.y)
 	rotation = Vector3(0, rotation.y + rotation_dir * rotation_speed * delta, 0)
@@ -55,6 +59,7 @@ func _on_update_rotaion_by_analog(force, pos):
 	var difference = fmod(direction_analog - rotation.y, max_angle)
 	difference = fmod(2 * difference, max_angle) - difference
 	target_dir_analog = rotation.y + difference
+	print(rad2deg(target_dir_analog))
 	
 func _on_change_status_analog(status):
 	analog_steer = status
