@@ -15,8 +15,13 @@ func _process(delta):
 	
 func _on_status_shoot_analog(status):
 	visible = status
-	print(rad2deg(Vector2(global_transform.origin.x, global_transform.origin.z).angle()))
-	if status == false && !shoot_analog.disable:
+	var deg_ship = Vector2(ship.get_node("FrontShip").global_transform.origin.x - ship.global_transform.origin.x, ship.get_node("FrontShip").global_transform.origin.z - ship.global_transform.origin.z)
+	var deg_aim = Vector2(target.y, -target.x)
+	print(rad2deg(deg_ship.angle_to(deg_aim)))
+	$Sprite3D.modulate = Color(1, 0, 0)
+	if abs(rad2deg(deg_ship.angle_to(deg_aim))) > 45 and abs(rad2deg(deg_ship.angle_to(deg_aim))) < 135 :
+		$Sprite3D.modulate = Color(1, 1, 1)
+	if status == false && !shoot_analog.disable && $Sprite3D.modulate == Color(1, 1, 1):
 		ship.shoot_cannon(Vector3(global_transform.origin.x, 0, global_transform.origin.z))
 
 func _on_value_shoot_analog(force, pos):

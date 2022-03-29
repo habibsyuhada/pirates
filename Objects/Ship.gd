@@ -14,6 +14,8 @@ var speed = 0
 var analog_steer = false
 var target_dir_analog = 0
 
+var last_debug
+
 func _ready():
 	get_node("/root/Game/HUD").connect("max_speed_slider_updated", self, "_on_max_speed_slider_updated")
 	get_node("/root/Game/HUD").connect("update_rotaion_by_analog", self, "_on_update_rotaion_by_analog")
@@ -39,7 +41,6 @@ func _physics_process(delta):
 	$Particles.process_material.set("linear_accel", -speed/accel_max_speed/2)
 	$Particles.process_material.get("initial_velocity")
 	if(abs(speed) > 1):
-		print(velocity)
 		$Particles.emitting = true
 
 func _on_max_speed_slider_updated(slider_value):
@@ -86,7 +87,6 @@ func get_input():
 				var b = Bullet.instance()
 				owner.add_child(b)
 				b.fire(global_transform.origin, body.translation)
-				print(body.translation)
 
 func shoot_cannon(target_position):
 	for i in 8:
